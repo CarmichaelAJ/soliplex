@@ -18,6 +18,7 @@ from pydantic_ai import settings as ai_settings
 
 from soliplex import config
 from soliplex import secrets
+from soliplex.chunk_selection import NeighborAwareSelectionConfig
 
 here = pathlib.Path(__file__).resolve().parent
 
@@ -158,6 +159,22 @@ W_OVERRIDE_SDTC_CONFIG_YAML = """
 """
 
 
+SDTC_WITH_SELECTION_YAML = """
+    rag_lancedb_stem: "rag"
+    chunk_selection:
+      method: neighbor_aware_utility_selection
+      parameters:
+        chunk_budget: 6
+        gamma: 0.5
+        lambda: 0.3
+        noise_penalty_c: 0.05
+        a: 2.0
+        b: -0.5
+        gain_function: "sqrt"
+        initial_pool_multiplier: 4.0
+"""
+
+
 # This one raises
 BOGUS_RRTC_CONFIG_YAML = """
     #rag_lancedb_stem: "rag"
@@ -265,7 +282,7 @@ TEST_QUIZ_ID = "test_quiz"
 TEST_QUIZ_TITLE = "Test Quiz"
 TEST_QUIZ_STEM = "question_file"
 TEST_QUIZ_OVR = "/path/to/question_file.json"
-TEST_QUIZ_MODEL_DEFAULT = "gpt-oss:20b"
+TEST_QUIZ_MODEL_DEFAULT = "o4-mini-2025-04-16"
 TEST_QUIZ_MODEL_EXPLICIT = "qwen3"
 TEST_QUIZ_PROVIDER_BASE_URL = "https://llm.example.com"
 INPUTS = "What color is the sky"
@@ -1790,6 +1807,43 @@ def test_sdtc_from_yaml(
             **exp_config,
         )
         assert sdt_config == expected
+
+
+def test_sdtc_from_yaml_chunk_selection(installation_config, temp_dir):
+    db_rag_dir = temp_dir / "db" / "rag"
+    db_rag_dir.mkdir(parents=True)
+
+    ic_environ = {"RAG_LANCE_DB_PATH": str(db_rag_dir)}
+    installation_config.get_environment = ic_environ.get
+
+    config_dir = temp_dir / "rooms" / "test_room"
+    config_dir.mkdir(parents=True)
+    config_path = config_dir / "room_config.yaml"
+    config_path.write_text(SDTC_WITH_SELECTION_YAML)
+
+    with config_path.open() as stream:
+        config_dict = yaml.safe_load(stream)
+
+    sdt_config = config.SearchDocumentsToolConfig.from_yaml(
+        installation_config=installation_config,
+        config_path=config_path,
+        config=config_dict,
+    )
+
+    assert isinstance(sdt_config.chunk_selection, NeighborAwareSelectionConfig)
+    chunk_sel = sdt_config.chunk_selection
+    assert chunk_sel is not None
+    assert chunk_sel.chunk_budget == 6
+    assert chunk_sel.gamma == 0.5
+    assert chunk_sel.redundancy_penalty == 0.3
+    assert chunk_sel.noise_penalty_c == 0.05
+    assert chunk_sel.a == 2.0
+    assert chunk_sel.b == -0.5
+    assert chunk_sel.gain_function == "sqrt"
+    assert chunk_sel.initial_pool_multiplier == 4.0
+
+    extra = sdt_config.get_extra_parameters()
+    assert extra["chunk_selection"]["chunk_budget"] == 6
 
 
 @pytest.mark.parametrize(

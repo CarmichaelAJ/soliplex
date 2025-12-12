@@ -1,0 +1,85 @@
+# Neighbor-Aware, Utility-Optimized Chunk Selection
+# -------------------------------------------------
+#
+# Overview
+# This retrieval method selects the most informative set of passages
+# under a fixed chunk budget by combining:
+#   (1) neighbor-aware relevance probabilities,
+#   (2) diversity-aware redundancy penalty,
+#   (3) greedy marginal-utility maximization, and
+#   (4) a dynamic stopping rule.
+#
+# This method replaces simple "top_k by similarity" ranking with a
+# mathematically motivated selection process.
+
+method: neighbor_aware_utility_selection
+
+description: |
+  This method selects chunks using a mathematically optimized utility function.
+
+  Each retrieved chunk i has a retriever similarity score S_i.
+  We convert S_i into a pseudo-probability of relevance p_i using:
+      p_i = sigmoid(a * S_i + b)
+  and incorporate neighbor reinforcement:
+      p_i' = sigmoid(a * S_i + b + gamma * (S_{i-1} + S_{i+1}))
+  where gamma > 0 encourages selecting chunks with strong neighboring evidence.
+
+  For a chunk budget B, the method selects a subset S of chunks with |S| <= B
+  by maximizing a utility function:
+      U(S) =
+          sum_{i in S} g(p_i')
+          - lambda * sum_{i<j in S} sim(d_i, d_j)
+  where:
+      g(.) is a concave relevance gain function (log or sqrt),
+      sim(d_i, d_j) is cosine similarity between chunk texts,
+      lambda > 0 penalizes redundancy.
+
+  Chunks are chosen by greedy marginal utility:
+      delta_U(i | S) =
+          g(p_i')
+          - lambda * sum_{j in S} sim(d_i, d_j)
+          - c
+  where c > 0 is a small noise penalty discouraging unnecessary additions.
+
+  Selection continues while the best marginal gain is positive.
+  This yields a dynamic top_k <= B based on expected utility.
+
+parameters:
+  chunk_budget: 12
+  gamma: 0.4
+  lambda: 0.25
+  noise_penalty_c: 0.01
+  a: 4.0
+  b: -2.0
+  gain_function: "log"
+
+logic: |
+  1. Retrieve an initial pool of N0 chunks sorted by raw similarity score S_i.
+
+  2. Compute neighbor-aware probabilities:
+        p_i' = sigmoid(a * S_i + b + gamma * (S_{i-1} + S_{i+1}))
+
+  3. Initialize S = empty.
+
+  4. While |S| < chunk_budget:
+       For each candidate i not in S:
+         Compute marginal utility:
+            delta_U(i) = g(p_i')
+                     - lambda * sum_{j in S} cos_sim(d_i, d_j)
+                     - noise_penalty_c
+       Choose i* with maximum delta_U(i).
+       If delta_U(i*) <= 0: break.
+       Else: add i* to S.
+
+  5. Sort final S by p_i' descending or by document order.
+
+  6. Return the final selected chunks S to the QA model.
+
+notes: |
+  - This method mathematically formalizes "grab neighbors of good chunks"
+    by embedding neighbor reinforcement directly into the scoring function.
+  - Redundancy penalty ensures diversity and prevents over-selection
+    of many nearly identical chunks.
+  - The dynamic stopping rule selects k automatically based on utility.
+  - This approach can be benchmarked against standard top_k retrieval
+    without modifying underlying embedding models.

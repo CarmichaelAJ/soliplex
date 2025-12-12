@@ -6,7 +6,10 @@ agent used to make the calls to the LLM.
 
 ```yaml
 agent:
-    model_name: "gpt-oss:20b"
+    model_name: "o4-mini-2025-04-16"
+    provider_type: "openai"
+    provider_base_url: "https://api.openai.com"
+    provider_key: "secret:OPENAI_API_KEY"
     system_prompt: |
       You are an expert AI assistant specializing in information retrieval.
 
@@ -27,12 +30,17 @@ agent:
 - `system_prompt` is the "instructions" for the LLM serving the room.
   If it starts with a `./`, it will be treated as a filename in the
   same directory, whose contents will be read in its place.
+  When targeting GPT-OSS through OpenAI, remember to set
+  `OPENAI_API_KEY` in your `.env` file (copy `.env.example` as a template).
 
 A minimal configuration, without an external prompt file:
 
 ```yaml
 agent:
-    model_name: "qwen3:latest"
+    model_name: "o4-mini-2025-04-16"
+    provider_type: "openai"
+    provider_base_url: "https://api.openai.com"
+    provider_key: "secret:OPENAI_API_KEY"
     system_prompt: |
         You are a knowledgeable assistant that helps users find information from a document knowledge base.
 
@@ -45,7 +53,10 @@ A minimal configuration, but with the prompt stored in external file:
 
 ```yaml
 agent:
-    model_name: "qwen3:latest"
+    model_name: "o4-mini-2025-04-16"
+    provider_type: "openai"
+    provider_base_url: "https://api.openai.com"
+    provider_key: "secret:OPENAI_API_KEY"
     system_prompt: "./prompt.txt"
 ```
 

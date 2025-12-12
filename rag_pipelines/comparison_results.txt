@@ -1,0 +1,46 @@
+Question 1: How do I install and activate the Soliplex development environment?
+Reference Answer: Clone the repo, create a Python 3.13 virtualenv, activate it, upgrade pip/setuptools, then run `pip install -e .` from the repo so the CLI entry points are available.
+  [OpenAFI] Retrieved Score: 0.4444444444444444
+  [OpenAFI] Retrieved Text: 2. Set up a Python3 virtual environment:    ```bash    python -m venv venv    source venv/bin/activate    pip install --upgrade setuptools pip    ```  3. Install `soliplex` and its dependencies:    ```bash    pip install -e .    ```  4. Set up environment variables:
+  [Soliplex] Retrieved Score: 0.34036144578313254
+  [Soliplex] Retrieved Text: Server Setup Installation 1. Clone the repository: ``` git clone git@github.com:soliplex/soliplex.git cd soliplex/ ``` 3. Set up a Python3 virtual environment: ``` python -m venv venv source venv/bin/activate pip install --upgrade setuptools pip ``` 5.  Install ``` soliplex ``` and its dependencies: ``` pip install -e . ``` 6. Set up environment variables: An environment file can be used to configure secrets. For logfire, create a ``` .env ``` file with: ``` LOGFIRE_TOKEN=<your_token_here> ```
+--------------------------------------------------------------------------------
+Question 2: Where are the Soliplex documentation chunks stored in the default pipelines?
+Reference Answer: Both example pipelines store LanceDB databases under `rag_pipelines/<pipeline>/db/`; the reference docs are chunked from `docs/` and written to `rag_pipelines/soliplex/db/rag.lancedb` for the Haiku build and to `rag_pipelines/OpenAFI/chroma_storage_1536/` for the OpenAFI build.
+  [OpenAFI] Retrieved Score: 0.02857142857142857
+  [OpenAFI] Retrieved Text: # Soliplex Documentation  Welcome to the Soliplex documentation. This system provides AI-powered retrieval-augmented generation capabilities for intelligent document search and question answering.  ## Quick Start
+  [Soliplex] Retrieved Score: 0.029723991507430998
+  [Soliplex] Retrieved Text: Soliplex Documentation Welcome to the Soliplex documentation. This system provides AI-powered retrieval-augmented generation capabilities for intelligent document search and question answering.
+--------------------------------------------------------------------------------
+Question 3: How can I run the Flutter web client for Soliplex?
+Reference Answer: Inside `src/flutter`, run `flutter pub get` and then `flutter run -d chrome --web-port 59001` (after pointing it at a running backend).
+  [OpenAFI] Retrieved Score: 0.397212543554007
+  [OpenAFI] Retrieved Text: # Client Setup  The Soliplex client is a Flutter web application that provides the user interface for interacting with the RAG system.  ## Prerequisites
+  [Soliplex] Retrieved Score: 0.42857142857142855
+  [Soliplex] Retrieved Text: Client Setup The Soliplex client is a Flutter web application that provides the user interface for interacting with the RAG system.
+--------------------------------------------------------------------------------
+Question 4: What configuration file defines LanceDB settings for Soliplex?
+Reference Answer: The shared `haiku.rag.yaml` controls LanceDB storage/embedding providers (the Soliplex pipeline copies it under `rag_pipelines/soliplex/haiku.rag.yaml`), and rooms can override the LanceDB stem via `room` configs.
+  [OpenAFI] Retrieved Score: 0.06486486486486487
+  [OpenAFI] Retrieved Text: ```bash $ soliplex-cli list-environment example/installation.yaml  ─────────────────────── Configured environment variables ───────────────────────  - OLLAMA_BASE_URL          : MISSING - INSTALLATION_PATH        : file:. - RAG_LANCE_DB_PATH        : file:../db/rag - LOGFIRE_ENVIRONMENT      : container - LOGFIRE_SERVICE_NAME     : soliplex
+  [Soliplex] Retrieved Score: 0.012411347517730497
+  [Soliplex] Retrieved Text: Room Configuration Filesystem Layout Room Configuration File Schema Tool Configurations RAG / search-related The ``` soliplex.tools.search_documents ``` tool takes a number of configuration values. *Exactly one* of the following two elements is required: -  ``` rag_lancedb_stem ``` is a string:  it should be the "base name" (without path or ``` .lancedb ``` suffix) of the LanceDB file containing the RAG document data for the tool. This file must exist in the "standard" location (typically under the ``` db/rag/ ``` directory;  see below). ``` rag_lancedb_stem: "<room_id>" ``` -  ``` rag_lancedb_override_path ``` is a string:  it should be a fully-qualified pathname, including the suffix, of the LanceDB directory containing the RAG document data for the tool. ``` rag_lancedb_override_path: "/<path-to-rag-databases>/<room_id>.<extension>" ``` Other, optional elements for the ``` search_documents ``` tool:
+--------------------------------------------------------------------------------
+Question 5: How do I start the Soliplex backend without authentication?
+Reference Answer: Run `soliplex-cli serve example/minimal.yaml --no-auth-mode` (or the provided no-auth config) so the FastAPI server starts without OIDC.
+  [OpenAFI] Retrieved Score: 0.30115830115830117
+  [OpenAFI] Retrieved Text: # Using Soliplex  Once both the server and client are running, you can start using the Soliplex system.  ## Getting Started
+  [Soliplex] Retrieved Score: 0.22848200312989045
+  [Soliplex] Retrieved Text: Server Setup Running the Server Start the FastAPI server with auto-reload: ``` soliplex-cli serve example/installation.yaml -r both ``` The server will be available at ``` http://localhost:8000 ``` by default. For testing purposes, the server can be run with authentication disabled. To run without authentication: ``` soliplex-cli serve example/no_auth.yaml -r both ``` To confirm your room configuration: ``` curl -X 'GET' \   'http://127.0.0.1:8000/api/v1/rooms' \   -H 'accept: application/json' ```
+--------------------------------------------------------------------------------
+Summary (pipeline-question-score):
+OpenAFI	1	0.4444444444444444
+Soliplex	1	0.34036144578313254
+OpenAFI	2	0.02857142857142857
+Soliplex	2	0.029723991507430998
+OpenAFI	3	0.397212543554007
+Soliplex	3	0.42857142857142855
+OpenAFI	4	0.06486486486486487
+Soliplex	4	0.012411347517730497
+OpenAFI	5	0.30115830115830117
+Soliplex	5	0.22848200312989045

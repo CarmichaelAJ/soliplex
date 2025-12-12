@@ -31,6 +31,6 @@ E.g., to override only the reranking used by `haiku-rag` in a given room:
 ```yaml
 reranking:
   model:
-    name: "gpt-oss:20b"
+    name: "o4-mini-2025-04-16"
     provider: "ollama"
 ```

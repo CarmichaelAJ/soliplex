@@ -8,6 +8,7 @@ from haiku.rag.graph.research import state as rag_research_state
 
 from soliplex import agents
 from soliplex import agui
+from soliplex import chunk_selection
 from soliplex import config
 from soliplex import models
 
@@ -65,10 +66,23 @@ async def search_documents(
     }
 
     async with rag_client.HaikuRAG(**hr_client_kw) as rag:
+        selection_cfg = tool_config.chunk_selection
+        search_limit = tool_config.search_documents_limit
+        if selection_cfg is not None:
+            search_limit = selection_cfg.requested_candidates(search_limit)
+
         results = await rag.search(
             query,
-            limit=tool_config.search_documents_limit,
+            limit=search_limit,
         )
+
+        if selection_cfg is not None and results:
+            results = await chunk_selection.apply_neighbor_aware_selection(
+                hits=results,
+                embedder=rag.chunk_repository.embedder,
+                config=selection_cfg,
+                fallback_limit=tool_config.search_documents_limit,
+            )
 
         if tool_config.expand_context_radius > 0:
             results = await rag.expand_context(

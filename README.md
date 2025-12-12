@@ -66,6 +66,10 @@ Quick-and-dirty client for room queries
 python3.13 -m venv venv
 source venv/bin/activate
 pip install -e .
+
+# Configure secrets
+cp .env.example .env
+echo OPENAI_API_KEY=sk-your-key >> .env
 ```
 
 ### Index Soliplex docs into RAG database
@@ -150,6 +154,19 @@ as though you typed:
 ```bash
 soliplex-tui --url http://127.0.0.1:8000 --room haiku
 ```
+
+## Evaluation Workflow
+
+- `scripts/update_repos.py --pull` keeps the Soliplex and HaikuRAG trees on the
+  latest branches before you benchmark changes.
+- `scripts/compare_pipelines.py --questions-file ...` compares vanilla Haiku
+  retrieval with the neighbor-aware selector and records latency/token stats.
+- See `docs/evaluations.md` for the end-to-end process (sync, configure `.env`,
+  collect metrics, and feed them into quiz/evaluation harnesses).
+- `scripts/run_eval_suite.py --questions-file ...` runs HaikuRAG's `evaluations`
+  CLI (baseline) and the neighbor-aware telemetry back-to-back, streaming output
+  to your console while saving logs, summaries, and neighbor metrics under
+  `logs/evaluations/`.
 
 ## Configuration
 

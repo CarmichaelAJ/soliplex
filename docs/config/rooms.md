@@ -90,7 +90,10 @@ make the room's calls to the LLM.
 
 ```yaml
 agent:
-    model_name: "qwen3:latest"
+    model_name: "o4-mini-2025-04-16"
+    provider_type: "openai"
+    provider_base_url: "https://api.openai.com"
+    provider_key: "secret:OPENAI_API_KEY"
     system_prompt: "./prompt.txt"
 ```
 
@@ -156,6 +159,29 @@ Other, optional elements for the `search_documents` tool:
   expand_context_radius: 2
   ```
 
+- `chunk_selection` enables the neighbor-aware utility selector instead of
+  simple `top_k` retrieval. Provide a `method` (currently only
+  `neighbor_aware_utility_selection`) plus a `parameters` mapping. The
+  `chunk_budget` limits the final number of chunks, the `gamma`, `lambda`,
+  and `noise_penalty_c` parameters tune the neighborhood boost, redundancy
+  penalty, and stopping noise, and `a`/`b` control the logistic transform.
+  Optionally set `gain_function` (`log` or `sqrt`) and
+  `initial_pool_multiplier` to control how many raw hits are considered.
+
+  ```yaml
+  chunk_selection:
+    method: neighbor_aware_utility_selection
+    parameters:
+      chunk_budget: 12
+      gamma: 0.4
+      lambda: 0.25
+      noise_penalty_c: 0.01
+      a: 4.0
+      b: -2.0
+      gain_function: "log"
+      initial_pool_multiplier: 3.0
+  ```
+
 Minimal `search_documents` configuration, with RAG database file found
 in the standard location:
 
@@ -186,6 +212,16 @@ agent:
       search_documents_limit: 8
       return_citations: true
       expand_context_radius: 2
+      chunk_selection:
+        method: neighbor_aware_utility_selection
+        parameters:
+          chunk_budget: 10
+          gamma: 0.4
+          lambda: 0.25
+          noise_penalty_c: 0.01
+          a: 4.0
+          b: -2.0
+          gain_function: "log"
 ```
 
 ### Quiz-related elements

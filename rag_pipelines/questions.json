@@ -1,0 +1,24 @@
+{
+  "questions": [
+    {
+      "question": "How do I install and activate the Soliplex development environment?",
+      "reference": "Clone the repo, create a Python 3.13 virtualenv, activate it, upgrade pip/setuptools, then run `pip install -e .` from the repo so the CLI entry points are available."
+    },
+    {
+      "question": "Where are the Soliplex documentation chunks stored in the default pipelines?",
+      "reference": "Both example pipelines store LanceDB databases under `rag_pipelines/<pipeline>/db/`; the reference docs are chunked from `docs/` and written to `rag_pipelines/soliplex/db/rag.lancedb` for the Haiku build and to `rag_pipelines/OpenAFI/chroma_storage_1536/` for the OpenAFI build."
+    },
+    {
+      "question": "How can I run the Flutter web client for Soliplex?",
+      "reference": "Inside `src/flutter`, run `flutter pub get` and then `flutter run -d chrome --web-port 59001` (after pointing it at a running backend)."
+    },
+    {
+      "question": "What configuration file defines LanceDB settings for Soliplex?",
+      "reference": "The shared `haiku.rag.yaml` controls LanceDB storage/embedding providers (the Soliplex pipeline copies it under `rag_pipelines/soliplex/haiku.rag.yaml`), and rooms can override the LanceDB stem via `room` configs."
+    },
+    {
+      "question": "How do I start the Soliplex backend without authentication?",
+      "reference": "Run `soliplex-cli serve example/minimal.yaml --no-auth-mode` (or the provided no-auth config) so the FastAPI server starts without OIDC."
+    }
+  ]
+}

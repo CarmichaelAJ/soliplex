@@ -1,0 +1,3 @@
+$ C:\Users\Carmi\Downloads\soliplex-main\haiku.rag\.venv\Scripts\python.exe -m evaluations.evaluations.benchmark run repliqa --config rag_pipelines\soliplex\haiku.rag.yaml --db rag_pipelines\soliplex\db\rag.lancedb --limit 50
+
+C:\Users\Carmi\Downloads\soliplex-main\haiku.rag\.venv\Scripts\python.exe: Error while finding module specification for 'evaluations.evaluations.benchmark' (ModuleNotFoundError: No module named 'evaluations.evaluations')

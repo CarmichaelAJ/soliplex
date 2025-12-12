@@ -76,7 +76,7 @@ looked up by ID from Python code using `the_installation.get_agent_by_id`.
 agent_configs:
 
   - id: "ollama_gpt_oss"
-    model_name: "gpt-oss:20b"
+    model_name: "o4-mini-2025-04-16"
     system_prompt: |
       You are an expert AI assistant specializing in information retrieval.
       ...

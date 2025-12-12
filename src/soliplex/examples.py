@@ -48,7 +48,7 @@ def joker_agent_factory(
 
     joke_generation_agent = pydantic_ai.Agent(
         model=openai_models.OpenAIChatModel(
-            model_name="gpt-oss:latest",
+            model_name="gpt-oss-latest",
             provider=provider,
         ),
         output_type=list[str],

@@ -21,6 +21,8 @@ from haiku.rag import config as hr_config
 from pydantic_ai import settings as ai_settings
 from pydantic_ai.agent import abstract as ai_ag_abstract
 
+from soliplex.chunk_selection import NeighborAwareSelectionConfig
+
 SECRET_PREFIX = "secret:"
 FILE_PREFIX = "file:"
 
@@ -452,6 +454,7 @@ class SearchDocumentsToolConfig(ToolConfig, _RAGToolBase):
     expand_context_radius: int = 2
     search_documents_limit: int = 5
     return_citations: bool = False
+    chunk_selection: NeighborAwareSelectionConfig | None = None
 
     # Set in 'from_yaml' below
     _installation_config: InstallationConfig = _no_repr_none()
@@ -468,6 +471,11 @@ class SearchDocumentsToolConfig(ToolConfig, _RAGToolBase):
             config["_installation_config"] = installation_config
             config["_config_path"] = config_path
 
+            if "chunk_selection" in config and config["chunk_selection"] is not None:
+                config["chunk_selection"] = NeighborAwareSelectionConfig.from_mapping(
+                    config["chunk_selection"]
+                )
+
             instance = cls(**config)
         except Exception as exc:
             raise FromYamlException(config_path, "sdtc", config) from exc
@@ -483,6 +491,11 @@ class SearchDocumentsToolConfig(ToolConfig, _RAGToolBase):
                 "search_documents_limit": self.search_documents_limit,
                 "return_citations": self.return_citations,
             }
+            | (
+                {"chunk_selection": dataclasses.asdict(self.chunk_selection)}
+                if self.chunk_selection is not None
+                else {}
+            )
         )
 
 
@@ -1069,7 +1082,7 @@ class QuizConfig:
         if self.judge_agent is None:
             kwargs = {
                 "id": f"quiz-{self.id}-judge",
-                "model_name": "gpt-oss:20b",
+                "model_name": "o4-mini-2025-04-16",
             }
             if self._installation_config is not None:
                 i_config = self._installation_config

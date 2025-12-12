@@ -1,0 +1,12 @@
+$ C:\Users\Carmi\Downloads\soliplex-main\haiku.rag\.venv\Scripts\evaluations.exe repliqa --config rag_pipelines\soliplex\haiku.rag.yaml --db rag_pipelines\soliplex\db\rag.lancedb --limit 50 --skip-db
+
+Loading config from: rag_pipelines\soliplex\haiku.rag.yaml
+Running retrieval benchmarks...
+Building retrieval cases... -------------------------------------- 100% 0:00:00
+[12/12/25 12:23:59] INFO     1 upgrade step(s) pending           __init__.py:41
+                    INFO     Applying upgrade 0.20.0: Add        __init__.py:45
+                             'docling_document_json' and                       
+                             'docling_version' columns to                      
+                             documents table (1/1)                             
+                    INFO     Completed upgrade 0.20.0            __init__.py:53
+Evaluating retrieval benchmark 'repliqa_retrieval_evaluation' on 50 queries...

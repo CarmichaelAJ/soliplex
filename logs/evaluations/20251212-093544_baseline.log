@@ -1,0 +1,397 @@
+$ evaluations repliqa --config rag_pipelines\soliplex\haiku.rag.yaml --db rag_pipelines\soliplex\db\rag.lancedb --limit 50
+
+Loading config from: rag_pipelines\soliplex\haiku.rag.yaml
+Using dataset: repliqa
+[12/12/25 09:35:51] INFO     1 upgrade step(s) pending           __init__.py:41
+                    INFO     Applying upgrade 0.20.0: Add        __init__.py:45
+                             'docling_document_json' and                       
+                             'docling_version' columns to                      
+                             documents table (1/1)                             
+                    INFO     Completed upgrade 0.20.0            __init__.py:53
+Populating database... ---------------------------------------- 100% 0:00:00
+Running retrieval benchmarks...
+Building retrieval cases... -------------------------------------- 100% 0:00:00
+[12/12/25 09:43:18] INFO     1 upgrade step(s) pending           __init__.py:41
+                    INFO     Applying upgrade 0.20.0: Add        __init__.py:45
+                             'docling_document_json' and                       
+                             'docling_version' columns to                      
+                             documents table (1/1)                             
+                    INFO     Completed upgrade 0.20.0            __init__.py:53
+Evaluating retrieval benchmark 'repliqa_retrieval_evaluation' on 50 queries...
+09:43:18.292 evaluate repliqa_retrieval_evaluation
+09:43:18.298   case: Case 1
+09:43:18.298     execute retrieval_target
+09:43:18.791     evaluator: MRREvaluator
+09:43:18.792   case: Case 2
+09:43:18.793     execute retrieval_target
+09:43:19.185     evaluator: MRREvaluator
+09:43:19.186   case: Case 3
+09:43:19.186     execute retrieval_target
+09:43:19.647     evaluator: MRREvaluator
+09:43:19.648   case: Case 4
+09:43:19.648     execute retrieval_target
+09:43:20.043     evaluator: MRREvaluator
+09:43:20.043   case: Case 5
+09:43:20.044     execute retrieval_target
+09:43:20.406     evaluator: MRREvaluator
+09:43:20.407   case: Case 6
+09:43:20.407     execute retrieval_target
+09:43:20.812     evaluator: MRREvaluator
+09:43:20.812   case: Case 7
+09:43:20.812     execute retrieval_target
+09:43:21.268     evaluator: MRREvaluator
+09:43:21.269   case: Case 8
+09:43:21.269     execute retrieval_target
+09:43:21.719     evaluator: MRREvaluator
+09:43:21.719   case: Case 9
+09:43:21.720     execute retrieval_target
+09:43:22.119     evaluator: MRREvaluator
+09:43:22.120   case: Case 10
+09:43:22.120     execute retrieval_target
+09:43:22.616     evaluator: MRREvaluator
+09:43:22.616   case: Case 11
+09:43:22.617     execute retrieval_target
+09:43:23.010     evaluator: MRREvaluator
+09:43:23.011   case: Case 12
+09:43:23.011     execute retrieval_target
+09:43:23.368     evaluator: MRREvaluator
+09:43:23.369   case: Case 13
+09:43:23.369     execute retrieval_target
+09:43:23.709     evaluator: MRREvaluator
+09:43:23.710   case: Case 14
+09:43:23.710     execute retrieval_target
+09:43:24.086     evaluator: MRREvaluator
+09:43:24.086   case: Case 15
+09:43:24.087     execute retrieval_target
+09:43:24.477     evaluator: MRREvaluator
+09:43:24.477   case: Case 16
+09:43:24.478     execute retrieval_target
+09:43:24.884     evaluator: MRREvaluator
+09:43:24.885   case: Case 17
+09:43:24.885     execute retrieval_target
+09:43:25.306     evaluator: MRREvaluator
+09:43:25.307   case: Case 18
+09:43:25.307     execute retrieval_target
+09:43:25.664     evaluator: MRREvaluator
+09:43:25.665   case: Case 19
+09:43:25.665     execute retrieval_target
+09:43:26.040     evaluator: MRREvaluator
+09:43:26.040   case: Case 20
+09:43:26.040     execute retrieval_target
+09:43:26.428     evaluator: MRREvaluator
+09:43:26.429   case: Case 21
+09:43:26.429     execute retrieval_target
+09:43:26.822     evaluator: MRREvaluator
+09:43:26.823   case: Case 22
+09:43:26.823     execute retrieval_target
+09:43:27.252     evaluator: MRREvaluator
+09:43:27.253   case: Case 23
+09:43:27.253     execute retrieval_target
+09:43:27.744     evaluator: MRREvaluator
+09:43:27.745   case: Case 24
+09:43:27.745     execute retrieval_target
+09:43:28.200     evaluator: MRREvaluator
+09:43:28.201   case: Case 25
+09:43:28.201     execute retrieval_target
+09:43:28.555     evaluator: MRREvaluator
+09:43:28.556   case: Case 26
+09:43:28.557     execute retrieval_target
+09:43:28.900     evaluator: MRREvaluator
+09:43:28.901   case: Case 27
+09:43:28.901     execute retrieval_target
+09:43:29.230     evaluator: MRREvaluator
+09:43:29.230   case: Case 28
+09:43:29.231     execute retrieval_target
+09:43:29.589     evaluator: MRREvaluator
+09:43:29.590   case: Case 29
+09:43:29.590     execute retrieval_target
+09:43:29.921     evaluator: MRREvaluator
+09:43:29.922   case: Case 30
+09:43:29.922     execute retrieval_target
+09:43:30.370     evaluator: MRREvaluator
+09:43:30.371   case: Case 31
+09:43:30.371     execute retrieval_target
+09:43:30.730     evaluator: MRREvaluator
+09:43:30.731   case: Case 32
+09:43:30.731     execute retrieval_target
+09:43:31.093     evaluator: MRREvaluator
+09:43:31.094   case: Case 33
+09:43:31.094     execute retrieval_target
+09:43:31.429     evaluator: MRREvaluator
+09:43:31.429   case: Case 34
+09:43:31.430     execute retrieval_target
+09:43:31.818     evaluator: MRREvaluator
+09:43:31.819   case: Case 35
+09:43:31.819     execute retrieval_target
+09:43:32.158     evaluator: MRREvaluator
+09:43:32.159   case: Case 36
+09:43:32.159     execute retrieval_target
+09:43:32.527     evaluator: MRREvaluator
+09:43:32.527   case: Case 37
+09:43:32.527     execute retrieval_target
+09:43:32.925     evaluator: MRREvaluator
+09:43:32.926   case: Case 38
+09:43:32.926     execute retrieval_target
+09:43:33.322     evaluator: MRREvaluator
+09:43:33.323   case: Case 39
+09:43:33.323     execute retrieval_target
+09:43:33.680     evaluator: MRREvaluator
+09:43:33.681   case: Case 40
+09:43:33.681     execute retrieval_target
+09:43:34.056     evaluator: MRREvaluator
+09:43:34.056   case: Case 41
+09:43:34.057     execute retrieval_target
+09:43:34.422     evaluator: MRREvaluator
+09:43:34.422   case: Case 42
+09:43:34.423     execute retrieval_target
+09:43:34.802     evaluator: MRREvaluator
+09:43:34.802   case: Case 43
+09:43:34.803     execute retrieval_target
+09:43:35.277     evaluator: MRREvaluator
+09:43:35.278   case: Case 44
+09:43:35.278     execute retrieval_target
+09:43:35.739     evaluator: MRREvaluator
+09:43:35.740   case: Case 45
+09:43:35.740     execute retrieval_target
+09:43:36.103     evaluator: MRREvaluator
+09:43:36.103   case: Case 46
+09:43:36.104     execute retrieval_target
+09:43:36.449     evaluator: MRREvaluator
+09:43:36.449   case: Case 47
+09:43:36.450     execute retrieval_target
+09:43:36.806     evaluator: MRREvaluator
+09:43:36.807   case: Case 48
+09:43:36.807     execute retrieval_target
+09:43:37.184     evaluator: MRREvaluator
+09:43:37.185   case: Case 49
+09:43:37.185     execute retrieval_target
+09:43:37.552     evaluator: MRREvaluator
+09:43:37.553   case: Case 50
+09:43:37.553     execute retrieval_target
+09:43:37.928     evaluator: MRREvaluator
+Evaluating retrieval_target -------------------------------------- 100% 0:00:00
+
+=== Retrieval Benchmark Results ===
+Dataset: repliqa
+Total queries: 50
+MRR: 0.9900
+Completed retrieval benchmark 'repliqa_retrieval_evaluation'.
+
+Running QA benchmarks...
+[12/12/25 09:43:39] INFO     1 upgrade step(s) pending           __init__.py:41
+                    INFO     Applying upgrade 0.20.0: Add        __init__.py:45
+                             'docling_document_json' and                       
+                             'docling_version' columns to                      
+                             documents table (1/1)                             
+                    INFO     Completed upgrade 0.20.0            __init__.py:53
+Evaluating QA benchmark 'repliqa_qa_evaluation' on 50 questions...
+2025-12-12 10:49:21,271 - INFO - Retrying request to /embeddings in 0.400364 seconds
+2025-12-12 12:45:22,256 - INFO - Retrying request to /chat/completions in 0.428766 seconds
+09:43:39.224 evaluate repliqa_qa_evaluation
+09:43:39.226   case: 1_mljudppg
+09:43:39.226     execute answer_question
+09:43:39.229       agent run
+09:43:39.230         chat qwen3-vl:8b
+09:45:47.276         running 1 tool
+09:45:47.277           running tool: search_documents
+09:45:50.163         chat qwen3-vl:8b
+09:49:55.556     evaluator: LLMJudge
+09:49:55.563       judge_input_output_expected run
+09:49:55.564         chat qwen3-vl:8b
+09:51:44.369   case: 2_mljudppg
+09:51:44.369     execute answer_question
+09:51:44.370       agent run
+09:51:44.372         chat qwen3-vl:8b
+09:53:02.049         running 1 tool
+09:53:02.050           running tool: search_documents
+09:53:04.535   case: 3_mljudppg
+09:53:04.535     execute answer_question
+09:53:04.536       agent run
+09:53:04.537         chat qwen3-vl:8b
+09:55:13.152         running 1 tool
+09:55:13.152           running tool: search_documents
+09:55:15.590   case: 4_mljudppg
+09:55:15.590     execute answer_question
+09:55:15.592       agent run
+09:55:15.592         chat qwen3-vl:8b
+09:56:43.436         running 1 tool
+09:56:43.437           running tool: search_documents
+09:56:45.705   case: 5_mljudppg
+09:56:45.706     execute answer_question
+09:56:45.708       agent run
+09:56:45.713         chat qwen3-vl:8b
+09:58:33.061         running 1 tool
+09:58:33.062           running tool: search_documents
+09:58:35.323   case: 6_wnknrznz
+09:58:35.323     execute answer_question
+09:58:35.325       agent run
+09:58:35.326         chat qwen3-vl:8b
+10:00:28.567         running 1 tool
+10:00:28.567           running tool: search_documents
+10:00:30.783   case: 7_wnknrznz
+10:00:30.784     execute answer_question
+10:00:30.785       agent run
+10:00:30.787         chat qwen3-vl:8b
+10:03:33.159         running 1 tool
+10:03:33.160           running tool: search_documents
+10:03:35.384   case: 8_wnknrznz
+10:03:35.385     execute answer_question
+10:03:35.386       agent run
+10:03:35.387         chat qwen3-vl:8b
+10:07:02.060         running 1 tool
+10:07:02.061           running tool: search_documents
+10:07:04.359   case: 9_wnknrznz
+10:07:04.360     execute answer_question
+10:07:04.361       agent run
+10:07:04.363         chat qwen3-vl:8b
+10:08:02.618         running 1 tool
+10:08:02.619           running tool: search_documents
+10:08:04.866   case: 10_wnknrznz
+10:08:04.867     execute answer_question
+10:08:04.870       agent run
+10:08:04.875         chat qwen3-vl:8b
+10:10:09.521         running 1 tool
+10:10:09.522           running tool: search_documents
+10:10:11.730   case: 11_ygsojxas
+10:10:11.730     execute answer_question
+10:10:11.731       agent run
+10:10:11.733         chat qwen3-vl:8b
+10:13:53.696         running 1 tool
+10:13:53.696           running tool: search_documents
+10:13:55.863   case: 12_ygsojxas
+10:13:55.863     execute answer_question
+10:13:55.864       agent run
+10:13:55.865         chat qwen3-vl:8b
+10:15:03.800         running 1 tool
+10:15:03.800           running tool: search_documents
+10:15:05.924   case: 13_ygsojxas
+10:15:05.925     execute answer_question
+10:15:05.926       agent run
+10:15:05.927         chat qwen3-vl:8b
+10:18:06.295         running 1 tool
+10:18:06.296           running tool: search_documents
+10:18:08.539   case: 14_ygsojxas
+10:18:08.539     execute answer_question
+10:18:08.540       agent run
+10:18:08.541         chat qwen3-vl:8b
+10:21:24.674         running 1 tool
+10:21:24.674           running tool: search_documents
+10:21:26.806   case: 15_ygsojxas
+10:21:26.807     execute answer_question
+10:21:26.809       agent run
+10:21:26.813         chat qwen3-vl:8b
+10:23:13.343         running 1 tool
+10:23:13.344           running tool: search_documents
+10:23:15.554   case: 16_bnromffy
+10:23:15.555     execute answer_question
+10:23:15.556       agent run
+10:23:15.557         chat qwen3-vl:8b
+10:25:48.677         running 1 tool
+10:25:48.677           running tool: search_documents
+10:25:51.044   case: 17_bnromffy
+10:25:51.045     execute answer_question
+10:25:51.047       agent run
+10:25:51.048         chat qwen3-vl:8b
+10:27:37.469         running 1 tool
+10:27:37.469           running tool: search_documents
+10:27:39.745   case: 18_bnromffy
+10:27:39.746     execute answer_question
+10:27:39.747       agent run
+10:27:39.748         chat qwen3-vl:8b
+10:28:39.989         running 1 tool
+10:28:39.990           running tool: search_documents
+10:28:42.355   case: 19_bnromffy
+10:28:42.356     execute answer_question
+10:28:42.359       agent run
+10:28:42.360         chat qwen3-vl:8b
+10:30:19.279         running 1 tool
+10:30:19.279           running tool: search_documents
+10:30:21.533   case: 20_bnromffy
+10:30:21.533     execute answer_question
+10:30:21.536       agent run
+10:30:21.541         chat qwen3-vl:8b
+10:31:40.593         running 1 tool
+10:31:40.594           running tool: search_documents
+10:31:42.760   case: 21_apgxzkuc
+10:31:42.761     execute answer_question
+10:31:42.763       agent run
+10:31:42.765         chat qwen3-vl:8b
+10:37:16.264         running 1 tool
+10:37:16.264           running tool: search_documents
+10:39:19.925   case: 22_apgxzkuc
+10:39:19.926     execute answer_question
+10:39:19.927       agent run
+10:39:19.929         chat qwen3-vl:8b
+10:44:49.504         running 1 tool
+10:44:49.505           running tool: search_documents
+10:51:52.939   case: 23_apgxzkuc
+10:51:52.940     execute answer_question
+10:51:52.941       agent run
+10:51:52.942         chat qwen3-vl:8b
+10:55:27.164         running 1 tool
+10:55:27.165           running tool: search_documents
+10:56:42.974   case: 24_apgxzkuc
+10:56:42.975     execute answer_question
+10:56:42.976       agent run
+10:56:42.978         chat qwen3-vl:8b
+11:00:26.052         running 1 tool
+11:00:26.052           running tool: search_documents
+11:01:45.491   case: 25_apgxzkuc
+11:01:45.492     execute answer_question
+11:01:45.495       agent run
+11:01:45.514         chat qwen3-vl:8b
+11:03:21.213         running 1 tool
+11:03:21.213           running tool: search_documents
+11:06:57.894   case: 26_dbbxlbqv
+11:06:57.894     execute answer_question
+11:06:57.895       agent run
+11:06:57.896         chat qwen3-vl:8b
+11:10:13.293         running 1 tool
+11:10:13.293           running tool: search_documents
+11:10:25.208   case: 27_dbbxlbqv
+11:10:25.208     execute answer_question
+11:10:25.209       agent run
+11:10:25.210         chat qwen3-vl:8b
+12:22:34.302         running 1 tool
+12:22:34.302           running tool: search_documents
+12:23:31.054   case: 28_dbbxlbqv
+12:23:31.055     execute answer_question
+12:23:31.057       agent run
+12:23:31.059         chat qwen3-vl:8b
+12:29:37.777         running 1 tool
+12:29:37.778           running tool: search_documents
+12:29:54.814   case: 29_dbbxlbqv
+12:29:54.816     execute answer_question
+12:29:54.821       agent run
+12:29:54.824         chat qwen3-vl:8b
+12:32:39.317         running 1 tool
+12:32:39.317           running tool: search_documents
+12:35:22.229   case: 30_dbbxlbqv
+12:35:22.229     execute answer_question
+12:35:22.232       agent run
+12:35:22.234         chat qwen3-vl:8b
+12:53:49.504         running 1 tool
+12:53:49.512           running tool: search_documents
+12:53:56.388   case: 31_dkbpsuos
+12:53:56.390     execute answer_question
+12:53:56.397       agent run
+12:53:56.404         chat qwen3-vl:8b
+13:01:57.187         running 1 tool
+13:01:57.189           running tool: search_documents
+13:04:00.153   case: 32_dkbpsuos
+13:04:00.155     execute answer_question
+13:04:00.161       agent run
+13:04:00.165         chat qwen3-vl:8b
+13:11:29.158         running 1 tool
+13:11:29.159           running tool: search_documents
+13:12:49.733   case: 33_dkbpsuos
+13:12:49.734     execute answer_question
+13:12:49.736       agent run
+13:12:49.737         chat qwen3-vl:8b
+13:16:11.169         running 1 tool
+13:16:11.170           running tool: search_documents
+13:18:33.280   case: 34_dkbpsuos
+13:18:33.281     execute answer_question
+13:18:33.283       agent run
+13:18:33.290         chat qwen3-vl:8b
+13:26:30.798         running 1 tool

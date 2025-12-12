@@ -1,0 +1,16 @@
+$ C:\ProgramData\Anaconda3\python.exe -m evaluations.evaluations.benchmark run repliqa --config rag_pipelines\soliplex\haiku.rag.yaml --db rag_pipelines\soliplex\db\rag.lancedb --limit 50
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Carmi\Downloads\soliplex-main\haiku.rag\evaluations\evaluations\benchmark.py", line 6, in <module>
+    import logfire
+  File "C:\Users\Carmi\AppData\Roaming\Python\Python312\site-packages\logfire\__init__.py", line 8, in <module>
+    from logfire.sampling import SamplingOptions
+  File "C:\Users\Carmi\AppData\Roaming\Python\Python312\site-packages\logfire\sampling\__init__.py", line 3, in <module>
+    from ._tail_sampling import SamplingOptions, SpanLevel, TailSamplingSpanInfo
+  File "C:\Users\Carmi\AppData\Roaming\Python\Python312\site-packages\logfire\sampling\_tail_sampling.py", line 17, in <module>
+    from logfire._internal.exporters.wrapper import WrapperSpanProcessor
+  File "C:\Users\Carmi\AppData\Roaming\Python\Python312\site-packages\logfire\_internal\exporters\wrapper.py", line 8, in <module>
+    from opentelemetry.sdk._logs import LogRecordProcessor, ReadableLogRecord, ReadWriteLogRecord
+ImportError: cannot import name 'ReadableLogRecord' from 'opentelemetry.sdk._logs' (C:\Users\Carmi\AppData\Roaming\Python\Python312\site-packages\opentelemetry\sdk\_logs\__init__.py)

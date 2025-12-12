@@ -1,0 +1,131 @@
+$ evaluations repliqa --config rag_pipelines\soliplex\haiku.rag.yaml --db rag_pipelines\soliplex\db\rag.lancedb --limit 50 --skip-db
+
+Loading config from: rag_pipelines\soliplex\haiku.rag.yaml
+Running retrieval benchmarks...
+Building retrieval cases... -------------------------------------- 100% 0:00:00
+[12/12/25 09:46:52] INFO     1 upgrade step(s) pending           __init__.py:41
+                    INFO     Applying upgrade 0.20.0: Add        __init__.py:45
+                             'docling_document_json' and                       
+                             'docling_version' columns to                      
+                             documents table (1/1)                             
+                    INFO     Completed upgrade 0.20.0            __init__.py:53
+Evaluating retrieval benchmark 'repliqa_retrieval_evaluation' on 50 queries...
+09:46:52.458 evaluate repliqa_retrieval_evaluation
+09:46:52.461   case: Case 1
+09:46:52.461     execute retrieval_target
+09:49:57.774   case: Case 2
+09:49:57.774     execute retrieval_target
+09:49:58.266   case: Case 3
+09:49:58.267     execute retrieval_target
+09:51:46.545   case: Case 4
+09:51:46.545     execute retrieval_target
+09:51:47.121   case: Case 5
+09:51:47.122     execute retrieval_target
+09:53:04.371   case: Case 6
+09:53:04.371     execute retrieval_target
+09:53:04.961   case: Case 7
+09:53:04.961     execute retrieval_target
+09:53:05.576   case: Case 8
+09:53:05.576     execute retrieval_target
+09:55:15.508   case: Case 9
+09:55:15.508     execute retrieval_target
+09:55:16.167   case: Case 10
+09:55:16.168     execute retrieval_target
+09:55:16.743   case: Case 11
+09:55:16.743     execute retrieval_target
+09:56:45.600   case: Case 12
+09:56:45.600     execute retrieval_target
+09:56:46.122   case: Case 13
+09:56:46.122     execute retrieval_target
+09:56:46.609   case: Case 14
+09:56:46.609     execute retrieval_target
+09:58:35.367   case: Case 15
+09:58:35.371     execute retrieval_target
+09:58:36.045   case: Case 16
+09:58:36.045     execute retrieval_target
+10:00:30.826   case: Case 17
+10:00:30.826     execute retrieval_target
+10:00:31.381   case: Case 18
+10:00:31.381     execute retrieval_target
+10:03:35.428   case: Case 19
+10:03:35.428     execute retrieval_target
+10:03:36.031   case: Case 20
+10:03:36.032     execute retrieval_target
+10:07:04.437   case: Case 21
+10:07:04.438     execute retrieval_target
+10:07:05.276   case: Case 22
+10:07:05.277     execute retrieval_target
+10:08:04.876   case: Case 23
+10:08:04.877     execute retrieval_target
+10:08:05.485   case: Case 24
+10:08:05.485     execute retrieval_target
+10:10:11.634   case: Case 25
+10:10:11.635     execute retrieval_target
+10:10:12.194   case: Case 26
+10:10:12.194     execute retrieval_target
+10:10:12.750   case: Case 27
+10:10:12.751     execute retrieval_target
+10:13:55.872   case: Case 28
+10:13:55.872     execute retrieval_target
+10:13:56.439   case: Case 29
+10:13:56.440     execute retrieval_target
+10:15:06.017   case: Case 30
+10:15:06.017     execute retrieval_target
+10:15:06.501   case: Case 31
+10:15:06.502     execute retrieval_target
+10:18:08.441   case: Case 32
+10:18:08.441     execute retrieval_target
+10:18:09.046   case: Case 33
+10:18:09.046     execute retrieval_target
+10:21:26.826   case: Case 34
+10:21:26.826     execute retrieval_target
+10:21:27.364   case: Case 35
+10:21:27.364     execute retrieval_target
+10:23:15.607   case: Case 36
+10:23:15.608     execute retrieval_target
+10:23:16.152   case: Case 37
+10:23:16.153     execute retrieval_target
+10:25:50.962   case: Case 38
+10:25:50.963     execute retrieval_target
+10:25:51.686   case: Case 39
+10:25:51.687     execute retrieval_target
+10:27:39.645   case: Case 40
+10:27:39.645     execute retrieval_target
+10:27:40.176   case: Case 41
+10:27:40.177     execute retrieval_target
+10:27:40.770   case: Case 42
+10:27:40.770     execute retrieval_target
+10:28:42.242   case: Case 43
+10:28:42.243     execute retrieval_target
+10:28:42.904   case: Case 44
+10:28:42.904     execute retrieval_target
+10:28:43.547   case: Case 45
+10:28:43.548     execute retrieval_target
+10:30:21.437   case: Case 46
+10:30:21.437     execute retrieval_target
+10:30:21.956   case: Case 47
+10:30:21.956     execute retrieval_target
+10:30:22.491   case: Case 48
+10:30:22.491     execute retrieval_target
+10:31:42.691   case: Case 49
+10:31:42.691     execute retrieval_target
+10:31:43.235   case: Case 50
+10:31:43.235     execute retrieval_target
+Evaluating retrieval_target -------------------------------------- 100% 0:00:00
+
+=== Retrieval Benchmark Results ===
+Dataset: repliqa
+Total queries: 50
+MRR: 0.0000
+Completed retrieval benchmark 'repliqa_retrieval_evaluation'.
+
+Running QA benchmarks...
+[12/12/25 10:31:47] INFO     1 upgrade step(s) pending           __init__.py:41
+                    INFO     Applying upgrade 0.20.0: Add        __init__.py:45
+                             'docling_document_json' and                       
+                             'docling_version' columns to                      
+                             documents table (1/1)                             
+                    WARNING  Skipping upgrade due to error        engine.py:298
+                             (db=0.19.6 -> pkg=0.19.6): Table                  
+                             'documents' already exists                        
+Evaluating QA benchmark 'repliqa_qa_evaluation' on 50 questions...

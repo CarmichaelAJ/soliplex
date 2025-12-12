@@ -8,6 +8,7 @@ from soliplex import agents
 from soliplex import config
 from soliplex import installation
 from soliplex import tools
+from soliplex.chunk_selection import NeighborAwareSelectionConfig
 
 USER = {
     "full_name": "Phreddy Phlyntstone",
@@ -88,6 +89,7 @@ async def test_search_documents(
     sdt_config = mock.create_autospec(config.SearchDocumentsToolConfig)
     sdt_config.expand_context_radius = w_radius
     sdt_config.return_citations = w_cites
+    sdt_config.chunk_selection = None
 
     if w_limit is None:
         sdt_config.search_documents_limit = exp_limit = 5
@@ -244,3 +246,86 @@ async def test_agui_state(the_installation, w_state):
     found = await tools.agui_state(ctx=ctx)
 
     assert found == expected
+
+
+@pytest.mark.anyio
+@mock.patch(
+    "soliplex.tools.chunk_selection.apply_neighbor_aware_selection",
+    new_callable=mock.AsyncMock,
+)
+@mock.patch("soliplex.tools.rag_client")
+async def test_search_documents_with_chunk_selection(
+    rag_client,
+    apply_selection,
+):
+    apply_selection.return_value = [
+        (
+            mock.Mock(
+                spec=["content", "document_uri"],
+                content="Selected #1",
+                document_uri="uri://selected-1",
+            ),
+            0.9,
+        )
+    ]
+
+    hr_class = rag_client.HaikuRAG = mock.MagicMock()
+    hr = hr_class.return_value
+    client = hr.__aenter__.return_value
+    search = client.search
+    expand_context = client.expand_context
+    chunk_repo = client.chunk_repository = mock.Mock()
+    chunk_repo.embedder = mock.Mock(name="embedder")
+
+    docs = [
+        (
+            mock.Mock(
+                spec=["content", "document_uri"],
+                content=f"Doc #{i_doc}",
+                document_uri=f"uri://doc-{i_doc}",
+            ),
+            i_doc / 10,
+        )
+        for i_doc in range(5)
+    ]
+    search.return_value = docs
+
+    sdt_config = mock.create_autospec(config.SearchDocumentsToolConfig)
+    sdt_config.expand_context_radius = 1
+    sdt_config.return_citations = True
+    sdt_config.search_documents_limit = 3
+    selection_cfg = NeighborAwareSelectionConfig(
+        chunk_budget=4,
+        gamma=0.1,
+        redundancy_penalty=0.2,
+        noise_penalty_c=0.0,
+        a=2.0,
+        b=-1.0,
+        gain_function="log",
+        initial_pool_multiplier=2.0,
+    )
+    sdt_config.chunk_selection = selection_cfg
+
+    found = await tools.search_documents(
+        query=QUESTION,
+        tool_config=sdt_config,
+    )
+
+    search.assert_awaited_once_with(
+        QUESTION,
+        limit=selection_cfg.requested_candidates(3),
+    )
+    apply_selection.assert_awaited_once_with(
+        hits=docs,
+        embedder=chunk_repo.embedder,
+        config=selection_cfg,
+        fallback_limit=3,
+    )
+    expand_context.assert_called_once_with(
+        apply_selection.return_value,
+        radius=1,
+    )
+
+    assert len(found) == 1
+    assert found[0].content == "Selected #1"
+    assert found[0].document_uri == "uri://selected-1"

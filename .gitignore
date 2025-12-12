@@ -1,4 +1,8 @@
+# Secrets / per-developer overrides
 .env
+.env.local
+.env.*.local
+
 venv/
 
 #Python

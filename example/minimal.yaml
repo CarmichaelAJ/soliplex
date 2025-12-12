@@ -22,6 +22,11 @@ id: "soliplex-conf-minimal"
 secrets:
 
   # ----------------------------------------------------------------------
+  # API key for GPT-OSS:20b via OpenAI
+  # ----------------------------------------------------------------------
+  - "OPENAI_API_KEY"
+
+  # ----------------------------------------------------------------------
   # MCP room token generation / validation secret
   #
   # If not set in the environment, we generate a random value at startup,
@@ -66,7 +71,10 @@ haiku_rag_config_file: "./haiku.rag.yaml"
 agent_configs:
 
   - id: "default_chat"
-    model_name: "qwen3:latest"
+    model_name: "o4-mini-2025-04-16"
+    provider_type: "openai"
+    provider_base_url: "https://api.openai.com"
+    provider_key: "secret:OPENAI_API_KEY"
     system_prompt: |
       You are an expert AI assistant specializing in information retrieval.
 
@@ -75,7 +83,10 @@ agent_configs:
       Always provide code or examples in Markdown blocks.
 
   - id: "alternate_chat"
-    model_name: "gpt-oss:20b"
+    model_name: "o4-mini-2025-04-16"
+    provider_type: "openai"
+    provider_base_url: "https://api.openai.com"
+    provider_key: "secret:OPENAI_API_KEY"
     system_prompt: |
       You are an expert AI assistant specializing in information retrieval.
 
